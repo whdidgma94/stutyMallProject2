@@ -10,7 +10,9 @@ public class ItemController {
 	Scanner scan = Util.scan;
 	private ItemDAO itemDAO = new ItemDAO();
 	private CartController cartController = CartController.getInstance();
-	private ItemController() {}
+	private ItemController() {
+		itemDAO.setSampleItem();
+	}
 	static private ItemController instance = new ItemController();
 	static public ItemController getInstance() {
 		return instance;

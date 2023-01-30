@@ -3,12 +3,14 @@ package S3_Cart;
 import java.util.Scanner;
 
 import S0_Main.MainController;
+import S1_Member.MemberController;
 import S2_Item.Item;
 import S_Util.Util;
 
 public class CartController {
 	Scanner scan = Util.scan;
 	private CartDAO cartDAO = new CartDAO();
+	private MemberController memberController = MemberController.getInstance();
 	private CartController() {}
 	static private CartController instance = new CartController();
 	static public CartController getInstance() {
@@ -55,11 +57,22 @@ public class CartController {
 	}
 	
 	void clearCart(int num) {
+		int total=0;
+		for(Cart cart : cartDAO.getCartList()) {
+			if(cart.getNum()==num) {
+				total+=cart.getPrice();
+			}
+		}
+		if(memberController.getMemberCash()<total) {
+			System.err.println("[잔액이 부족합니다]");
+			return;
+		}
 		for(Cart cart : cartDAO.getCartList()) {
 			if(cart.getNum()==num) {
 				cartDAO.getCartList().remove(cart);
 			}
 		}
+		memberController.setMemberCash(memberController.getMemberCash()-total);
 	}
 	
 	public void addCart(int stat, Item item) {
@@ -68,6 +81,9 @@ public class CartController {
 	}
 
 	public void cartMenu() {
+		if(memberController==null) {
+			memberController=MemberController.getInstance();
+		}
 		while(true) {
 			System.out.println("[1]장바구니출력 [2]구입 [3]삭제 [0]뒤로가기");
 			int sel = Util.getInt(0, 3);

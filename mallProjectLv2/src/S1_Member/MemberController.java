@@ -51,13 +51,32 @@ public class MemberController {
 		for(Member member : memberDAO.getMemberList()) {
 			System.out.println(member);
 		}
+		memberManager();
 	}
-	
+
+	private void memberManager() {
+		while (true) {
+			System.out.print("회원 번호 ");
+			int sel = Util.getInt(0, memberDAO.getMemberList().size());
+			if (sel == 0) {
+				break;
+			} else {
+				
+			}
+		}
+	}
+
 	public int getCurMember() {
 		return MainController.getStat();
 	}
 	public String getMemberId() {
 		return memberDAO.getCurrentMemberId(getCurMember());
+	}
+	public int getMemberCash() {
+		return memberDAO.getMemberList().get(getCurMember()).getCash();
+	}
+	public void setMemberCash(int money) {
+		memberDAO.getMemberList().get(getCurMember()).setCash(money);		
 	}
 	
 	public void memberMenu() {

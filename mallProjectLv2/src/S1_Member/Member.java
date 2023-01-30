@@ -8,7 +8,7 @@ public class Member {
 	private String id;
 	private String pw;
 	private String name;
-	
+	private int cash;
 	
 	public Member(String id, String pw, String name) {
 		super();
@@ -33,6 +33,12 @@ public class Member {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getCash() {
+		return cash;
+	}
+	public void setCash(int cash) {
+		this.cash = cash;
 	}
 	
 	
