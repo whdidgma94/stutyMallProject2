@@ -48,7 +48,6 @@ public class AdminController {
 }
 	
 	public void adminMenu() {
-		
 		while (true) {
 			System.out.println("[1.회원관리] [2.상품관리] [0.뒤로가기]");
 			int sel = Util.getInt(0, 3);

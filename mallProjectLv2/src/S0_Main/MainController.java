@@ -23,7 +23,7 @@ public class MainController {
 	}
 	
 	void run() {
-		memberController.getMemberDAO().setAdmin();
+		memberController.setAdmin();
 		while (true) {
 			if (stat == -1) {
 				printMainMenu();

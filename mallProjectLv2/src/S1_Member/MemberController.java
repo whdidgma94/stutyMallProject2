@@ -24,7 +24,7 @@ public class MemberController {
 		int stat=-1;
 		String id = Util.getString("아이디");
 		String pw = Util.getString("비밀번호");
-		stat = getMemberDAO().login(id, pw);
+		stat = memberDAO.login(id, pw);
 		if(stat==-1) {
 			System.err.println("로그인 실패");
 		}
@@ -32,7 +32,7 @@ public class MemberController {
 	}
 	public void join() {
 		String id = Util.getString("아이디");
-		if(getMemberDAO().checkId(id)) {
+		if(memberDAO.checkId(id)) {
 			System.err.println("이미 존재하는 아이디 입니다.");
 			return;
 		}
@@ -41,8 +41,10 @@ public class MemberController {
 		Member member = new Member(id,pw,name);
 		memberDAO.addMember(member);
 	}
-	public MemberDAO getMemberDAO() {
-		return memberDAO;
+
+	
+	public void setAdmin() {
+		memberDAO.setAdmin();
 	}
 	
 	public void printMember () {
