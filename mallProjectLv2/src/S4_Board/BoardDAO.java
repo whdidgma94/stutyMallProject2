@@ -7,6 +7,9 @@ import S_Util.Util;
 public class BoardDAO {
 	private ArrayList<Board> boardList = new ArrayList<Board>();
 	
+	public ArrayList<Board> getBoardList() {
+		return boardList;
+	}
 	void addBoard(Board board) {
 		boardList.add(board);
 	}
@@ -27,4 +30,5 @@ public class BoardDAO {
 		int sel = Util.getInt(1, boardList.size());
 		System.out.println(boardList.get(sel-1));
 	}
+
 }

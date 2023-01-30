@@ -14,6 +14,10 @@ public class MemberDAO {
 		memberList.add(member);
 	}
 	
+	String getCurrentMemberId(int idx) {
+		return memberList.get(idx).getId();
+	}
+	
 	boolean checkId(String id) {	
 		for(Member member : memberList) {
 			if(member.getId().equals(id)) {

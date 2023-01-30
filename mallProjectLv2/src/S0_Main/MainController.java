@@ -17,6 +17,7 @@ public class MainController {
 	MainController(){
 		memberController = MemberController.getInstance();
 		adminController = AdminController.getInstance();
+
 	}
 	void printMainMenu() {
 		System.out.println("[1]로그인 [2]회원가입 [0]종료");

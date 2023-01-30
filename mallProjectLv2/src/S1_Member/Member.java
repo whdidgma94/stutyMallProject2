@@ -1,6 +1,10 @@
 package S1_Member;
 
 public class Member {
+	@Override
+	public String toString() {
+		return "아이디 : " + id + " 비밀번호 : " + pw + " 이름 : " + name;
+	}
 	private String id;
 	private String pw;
 	private String name;

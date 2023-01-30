@@ -27,6 +27,17 @@ public class CartController {
 		}
 	}
 	
+	public void printAllCart() {
+		int cnt = 1;
+		for (Cart cart : cartDAO.getCartList()) {
+			System.out.println(cnt + ". " + cart);
+			cnt++;
+		}
+		if (cnt == 1) {
+			System.out.println("[장바구니가 비었습니다]");
+		}
+	}
+	
 	void removeCart(int num) {
 		printCart(MainController.getStat());
 		int input = Util.getInt(0, cartDAO.getCartList().size());

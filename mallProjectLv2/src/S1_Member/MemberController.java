@@ -1,6 +1,7 @@
 package S1_Member;
 
 
+import S0_Main.MainController;
 import S2_Item.ItemController;
 import S3_Cart.CartController;
 import S4_Board.BoardController;
@@ -17,6 +18,9 @@ public class MemberController {
 	static public MemberController getInstance() {
 		return instance;
 	}
+	
+	
+	
 	public int login() {
 		int stat=-1;
 		String id = Util.getString("아이디");
@@ -42,7 +46,21 @@ public class MemberController {
 		return memberDAO;
 	}
 	
+	public void printMember () {
+		for(Member member : memberDAO.getMemberList()) {
+			System.out.println(member);
+		}
+	}
+	
+	public int getCurMember() {
+		return MainController.getStat();
+	}
+	public String getMemberId() {
+		return memberDAO.getCurrentMemberId(getCurMember());
+	}
+	
 	public void memberMenu() {
+	
 		while(true) {
 			System.out.println("[1.쇼핑] [2.장바구니] [3.게시판] [0.뒤로가기]");
 			int sel = Util.getInt(0, 3);
