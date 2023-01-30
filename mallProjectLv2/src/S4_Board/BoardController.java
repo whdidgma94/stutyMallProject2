@@ -22,8 +22,7 @@ public class BoardController {
 		Board board = new Board(title,content,name);
 		boardDAO.addBoard(board);
 	}
-	void removeBoard(String name) {
-		showBoard();
+	void removeBoard(String name) {	
 		System.out.print("삭제할 게시물 번호");
 		int sel = Util.getInt(1, boardDAO.getBoardList().size());
 		if(!boardDAO.getBoardList().get(sel-1).getUserName().equals(name)) {

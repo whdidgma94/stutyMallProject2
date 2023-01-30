@@ -20,7 +20,6 @@ public class MemberController {
 	}
 	
 	
-	
 	public int login() {
 		int stat=-1;
 		String id = Util.getString("아이디");
