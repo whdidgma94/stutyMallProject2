@@ -48,24 +48,27 @@ public class MemberController {
 	}
 	
 	public void printMember () {
+		int idx = 1;
 		for(Member member : memberDAO.getMemberList()) {
-			System.out.println(member);
+			if (!member.getId().equals("ad")) {
+				System.out.println("[" + idx + "] " + member);
+				idx++;
+			}
 		}
 		memberManager();
 	}
-
+	
 	private void memberManager() {
-		while (true) {
-			System.out.print("회원 번호 ");
-			int sel = Util.getInt(0, memberDAO.getMemberList().size());
-			if (sel == 0) {
-				break;
-			} else {
-				
-			}
+		if(memberDAO.getMemberList().size()==1) {
+			System.err.println("회원이 없습니다");
+			return;
 		}
+		System.out.print("회원 번호 ");
+		int sel = Util.getInt(1, memberDAO.getMemberList().size() - 1);
+		System.out.print("입금액 ");
+		int money = Util.getInt(0, 100000) + memberDAO.getMemberList().get(sel).getCash();
+		memberDAO.getMemberList().get(sel).setCash(money);
 	}
-
 	public int getCurMember() {
 		return MainController.getStat();
 	}
@@ -78,12 +81,20 @@ public class MemberController {
 	public void setMemberCash(int money) {
 		memberDAO.getMemberList().get(getCurMember()).setCash(money);		
 	}
-	
+	public void addbuyList(String item) {
+		memberDAO.getMemberList().get(getCurMember()).getBuyList().add(item);
+		
+	}
+	private void printBuyList() {
+		for(String item : memberDAO.getMemberList().get(getCurMember()).getBuyList()) {
+			System.out.println(item);
+		}
+	}
 	public void memberMenu() {
 	
-		while(true) {
-			System.out.println("[1.쇼핑] [2.장바구니] [3.게시판] [0.뒤로가기]");
-			int sel = Util.getInt(0, 3);
+		while (true) {
+			System.out.println("[1.쇼핑] [2.장바구니] [3.게시판] [4.구매 내역] [0.뒤로가기]");
+			int sel = Util.getInt(0, 4);
 			if (sel == 0) {
 				break;
 			} else if (sel == 1) {
@@ -92,8 +103,12 @@ public class MemberController {
 				cartController.cartMenu();
 			} else if (sel == 3) {
 				boardController.boardMenu();
+			} else if (sel == 4) {
+				printBuyList();
 			}
 		}
 	}
+
+
 	
 }

@@ -1,15 +1,17 @@
 package S1_Member;
 
+import java.util.ArrayList;
+
 public class Member {
 	@Override
 	public String toString() {
-		return "아이디 : " + id + " 비밀번호 : " + pw + " 이름 : " + name;
+		return "아이디 : " + id + " \n    비밀번호 : " + pw + " \n    이름 : " + name+"\n";
 	}
 	private String id;
 	private String pw;
 	private String name;
 	private int cash;
-	
+	private	ArrayList<String> buyList = new ArrayList<String>();
 	public Member(String id, String pw, String name) {
 		super();
 		this.id = id;
@@ -18,6 +20,13 @@ public class Member {
 	}
 	public String getId() {
 		return id;
+	}
+
+	public ArrayList<String> getBuyList() {
+		return buyList;
+	}
+	public void setBuyList(ArrayList<String> buyList) {
+		this.buyList = buyList;
 	}
 	public void setId(String id) {
 		this.id = id;

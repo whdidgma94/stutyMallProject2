@@ -67,11 +67,14 @@ public class CartController {
 			System.err.println("[잔액이 부족합니다]");
 			return;
 		}
-		for(Cart cart : cartDAO.getCartList()) {
-			if(cart.getNum()==num) {
-				cartDAO.getCartList().remove(cart);
+		for(int i = 0 ; i < cartDAO.getCartList().size();i++) {
+			if(cartDAO.getCartList().get(i).getNum()==num) {
+				memberController.addbuyList(cartDAO.getCartList().get(i).getItemName());
+				cartDAO.getCartList().remove(i);
+				i--;
 			}
 		}
+		
 		memberController.setMemberCash(memberController.getMemberCash()-total);
 	}
 	
@@ -79,12 +82,13 @@ public class CartController {
 		Cart cart = new Cart(stat, item.getName(), item.getPrice());
 		cartDAO.addCart(cart);
 	}
-
+	
 	public void cartMenu() {
 		if(memberController==null) {
 			memberController=MemberController.getInstance();
 		}
 		while(true) {
+			System.out.println("현재 잔액 : "+memberController.getMemberCash());
 			System.out.println("[1]장바구니출력 [2]구입 [3]삭제 [0]뒤로가기");
 			int sel = Util.getInt(0, 3);
 			if(sel==0) {

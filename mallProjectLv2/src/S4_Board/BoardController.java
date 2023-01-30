@@ -21,6 +21,8 @@ public class BoardController {
 	
 		Board board = new Board(title,content,name);
 		boardDAO.addBoard(board);
+		int money=1000+memberController.getMemberCash();
+		memberController.setMemberCash(money);
 	}
 	void removeBoard(String name) {	
 		System.out.print("삭제할 게시물 번호");
@@ -39,6 +41,7 @@ public class BoardController {
 		if(memberController == null) {
 			memberController = MemberController.getInstance();
 		}
+		System.out.println("[게시글 작성시 1000원 지급]");
 		while(true) {
 			String name = memberController.getMemberId();
 			System.out.println("[1.게시글 목록] [2.게시글 작성] [3.게시글 삭제] [0.뒤로 가기]");
